@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- Custom Colors -->
+    <color name="red_bg">#DC0A2D</color>
+    <color name="grayscale_dark">#1D1D1D</color>
+    <color name="grayscale_medium">#666666</color>
+    <color name="grayscale_bg">#EFEFEF</color>
 </resources>
