@@ -7,5 +7,5 @@ import java.io.Serializable
  */
 data class Pokemon(
     val name: String?,
-    var id: Int = 0
+    val url: String?
 ) : Serializable

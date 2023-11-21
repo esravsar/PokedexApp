@@ -37,25 +37,19 @@ class PokemonListAdapter(
         holder.binding.tvPokemonName.text =
             pokemon?.name?.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
 
-        pokemonList.forEachIndexed { index, pokemon ->
-            pokemon?.id = index + 1
+        val pokemonId = pokemon?.url?.split("/").let { it?.get(it.size - 2)?.toIntOrNull() ?: 1 }
+
+        val formattedId = when {
+            pokemonId < 10 -> "#00$pokemonId"
+            pokemonId < 100 -> "#0$pokemonId"
+            else -> "#$pokemonId"
         }
+        holder.binding.tvPokemonNumber.text = formattedId
 
-        val pokemonId = pokemon?.id
-
-        pokemonId?.let {
-            val formattedId = when {
-                pokemonId < 10 -> "#00$pokemonId"
-                pokemonId < 100 -> "#0$pokemonId"
-                else -> "#$pokemonId"
-            }
-            holder.binding.tvPokemonNumber.text = formattedId
-        }
-
-        val url =
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon?.id}.png"
+        val imageUrl =
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png"
         Glide.with(holder.binding.ivPokemon.context)
-            .load(url)
+            .load(imageUrl)
             .into(holder.binding.ivPokemon)
     }
 

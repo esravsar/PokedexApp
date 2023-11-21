@@ -54,6 +54,7 @@
             android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:text="Bulbasaur"
+            android:textSize="12sp"
             android:textColor="@color/grayscale_dark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

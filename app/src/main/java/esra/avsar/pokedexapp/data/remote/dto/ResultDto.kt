@@ -13,6 +13,7 @@ data class ResultDto(
     val url: String?
 ) {
     fun toPokemonResult() = Pokemon(
-        name = name
+        name = name,
+        url = url
     )
 }
