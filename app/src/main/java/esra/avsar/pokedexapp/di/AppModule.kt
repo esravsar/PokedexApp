@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import esra.avsar.pokedexapp.data.remote.PokemonAPI
 import esra.avsar.pokedexapp.data.repository.PokemonRepositoryImpl
 import esra.avsar.pokedexapp.domain.repository.PokemonRepository
+import esra.avsar.pokedexapp.domain.usecase.getpokemondetail.GetPokemonDetailUseCase
 import esra.avsar.pokedexapp.domain.usecase.getpokemons.GetPokemonsUseCase
 import esra.avsar.pokedexapp.util.Constants.BASE_URL
 import retrofit2.Retrofit
@@ -32,6 +33,7 @@ object AppModule {
     @Singleton
     @Provides
     fun providePokemonRepository(
-        pokemonUseCase: GetPokemonsUseCase
-    ) = PokemonRepositoryImpl(pokemonUseCase) as PokemonRepository
+        pokemonUseCase: GetPokemonsUseCase,
+        pokemonDetailUseCase: GetPokemonDetailUseCase
+    ) = PokemonRepositoryImpl(pokemonUseCase, pokemonDetailUseCase) as PokemonRepository
 }

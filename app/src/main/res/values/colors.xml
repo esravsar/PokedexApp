@@ -7,4 +7,5 @@
     <color name="grayscale_dark">#1D1D1D</color>
     <color name="grayscale_medium">#666666</color>
     <color name="grayscale_bg">#EFEFEF</color>
+    <color name="grayscale_light">#E0E0E0</color>
 </resources>

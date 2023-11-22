@@ -20,8 +20,12 @@
         android:label="fragment_pokemon_detail"
         tools:layout="@layout/fragment_pokemon_detail" >
         <argument
-            android:name="name"
-            app:argType="string"
-            app:nullable="true" />
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_pokemonDetailFragment_to_pokemonListFragment"
+            app:destination="@id/pokemonListFragment"
+            app:popUpTo="@id/pokemonDetailFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

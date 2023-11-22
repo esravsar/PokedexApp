@@ -1,8 +1,10 @@
 package esra.avsar.pokedexapp.data.remote
 
+import esra.avsar.pokedexapp.data.remote.dto.PokemonDetailResponseDto
 import esra.avsar.pokedexapp.data.remote.dto.PokemonResponseDto
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -15,4 +17,8 @@ interface PokemonAPI {
         @Query("offset") offset: Int = 0
     ): Response<PokemonResponseDto>
 
+    @GET("pokemon/{pokemonId}")
+    suspend fun getPokemonDetail(
+        @Path("pokemonId") pokemonId: String
+    ): Response<PokemonDetailResponseDto>
 }
