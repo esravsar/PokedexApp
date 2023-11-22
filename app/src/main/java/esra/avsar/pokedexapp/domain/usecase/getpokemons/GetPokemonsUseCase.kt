@@ -1,5 +1,6 @@
 package esra.avsar.pokedexapp.domain.usecase.getpokemons
 
+import esra.avsar.pokedexapp.data.mappers.toPokemonResult
 import esra.avsar.pokedexapp.data.remote.PokemonAPI
 import esra.avsar.pokedexapp.domain.model.Pokemon
 import esra.avsar.pokedexapp.util.Resource

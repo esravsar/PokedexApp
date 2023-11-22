@@ -13,5 +13,5 @@ data class PokemonResponseDto(
     @SerializedName("previous")
     val previous: Any?,
     @SerializedName("results")
-    val results: List<ResultDto?>?
+    val results: List<PokemonResultDto?>?
 )
