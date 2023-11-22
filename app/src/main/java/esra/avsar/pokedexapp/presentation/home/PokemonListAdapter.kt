@@ -2,7 +2,6 @@ package esra.avsar.pokedexapp.presentation.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import esra.avsar.pokedexapp.databinding.AdapterPokemonItemBinding
@@ -13,9 +12,14 @@ import esra.avsar.pokedexapp.extension.formatPokemonId
 /**
  * Created by EsraAvsar on 20.11.2023.
  */
-class PokemonListAdapter(
-    private val pokemonList: ArrayList<Pokemon?>
-) : RecyclerView.Adapter<PokemonListAdapter.PokemonHolder>() {
+class PokemonListAdapter : RecyclerView.Adapter<PokemonListAdapter.PokemonHolder>() {
+
+    private val pokemonList = mutableListOf<Pokemon?>()
+    fun updatePokemonList(newList: List<Pokemon?>) {
+        pokemonList.clear()
+        pokemonList.addAll(newList)
+        notifyDataSetChanged()
+    }
 
     class PokemonHolder(val binding: AdapterPokemonItemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -42,12 +46,14 @@ class PokemonListAdapter(
             .into(holder.binding.ivPokemon)
 
         holder.itemView.setOnClickListener {
-            val action =
-                PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailFragment(
-                    pokemonId
-                )
-            Navigation.findNavController(it).navigate(action)
+            onItemClickListener?.invoke(pokemonId)
         }
+    }
+
+    private var onItemClickListener: ((Int) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Int) -> Unit) {
+        onItemClickListener = listener
     }
 
     override fun getItemCount(): Int = pokemonList.size

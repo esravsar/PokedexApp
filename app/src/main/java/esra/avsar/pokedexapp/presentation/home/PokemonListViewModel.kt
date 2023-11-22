@@ -20,6 +20,12 @@ class PokemonListViewModel @Inject constructor(
     val pokemonList = MutableLiveData<Resource<List<Pokemon?>>>()
     val pokemonLoading = MutableLiveData<Resource<Boolean>>()
     val pokemonError = MutableLiveData<Resource<Boolean>>()
+    val searchPokemonList: MutableList<Pokemon?> = mutableListOf()
+
+    fun setList(list: List<Pokemon?>) {
+        searchPokemonList.clear()
+        searchPokemonList.addAll(list)
+    }
 
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         println(throwable.localizedMessage)

@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import esra.avsar.pokedexapp.R
@@ -21,7 +21,7 @@ class PokemonListFragment : Fragment() {
     private var _binding: FragmentPokemonListBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: PokemonListViewModel
-    private lateinit var pokemonAdapter: PokemonListAdapter
+    private val pokemonAdapter: PokemonListAdapter by lazy { PokemonListAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,18 +45,29 @@ class PokemonListFragment : Fragment() {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             window.statusBarColor = resources.getColor(R.color.red_bg)
         }
-
         viewModel.loadPokemons()
+
+        pokemonAdapter.setOnItemClickListener {
+            val action =
+                PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailFragment(it)
+            findNavController().navigate(action)
+
+        }
     }
 
     private fun observeLiveData() {
-        viewModel.pokemonList.observe(viewLifecycleOwner, Observer { pokemons ->
-            binding.rvPokemon.visibility = View.VISIBLE
-            pokemonAdapter = PokemonListAdapter(ArrayList(pokemons.data))
-            binding.rvPokemon.adapter = pokemonAdapter
-        })
+        viewModel.pokemonList.observe(viewLifecycleOwner) { pokemons ->
+            pokemons?.let {
+                binding.rvPokemon.visibility = View.VISIBLE
+                pokemons.data?.let {
+                    pokemonAdapter.updatePokemonList(it)
+                    viewModel.setList(pokemons.data)
+                    binding.rvPokemon.adapter = pokemonAdapter
+                }
+            }
+        }
 
-        viewModel.pokemonError.observe(viewLifecycleOwner, Observer { error ->
+        viewModel.pokemonError.observe(viewLifecycleOwner) { error ->
             error.data?.let {
                 if (it) {
                     binding.tvErrorText.visibility = View.VISIBLE
@@ -65,9 +76,9 @@ class PokemonListFragment : Fragment() {
                     binding.tvErrorText.visibility = View.GONE
                 }
             }
-        })
+        }
 
-        viewModel.pokemonLoading.observe(viewLifecycleOwner, Observer { loading ->
+        viewModel.pokemonLoading.observe(viewLifecycleOwner) { loading ->
             loading.data?.let {
                 if (it) {
                     binding.progressBar.visibility = View.VISIBLE
@@ -77,6 +88,6 @@ class PokemonListFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                 }
             }
-        })
+        }
     }
 }
