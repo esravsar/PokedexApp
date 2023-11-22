@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import esra.avsar.pokedexapp.domain.model.PokemonDetail
+import esra.avsar.pokedexapp.domain.model.PokemonDetailAbout
 import esra.avsar.pokedexapp.domain.repository.PokemonRepository
 import esra.avsar.pokedexapp.util.Resource
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -17,6 +18,7 @@ import javax.inject.Inject
 class PokemonDetailViewModel @Inject constructor(private val pokemonRepository: PokemonRepository) :
     ViewModel() {
     val pokemon = MutableLiveData<Resource<PokemonDetail?>>()
+    val pokemonDetailAbout = MutableLiveData<Resource<PokemonDetailAbout?>>()
     val pokemonLoading = MutableLiveData<Resource<Boolean>>()
     val pokemonError = MutableLiveData<Resource<Boolean>>()
 
@@ -35,6 +37,21 @@ class PokemonDetailViewModel @Inject constructor(private val pokemonRepository: 
                     pokemonLoading.value = Resource.loading(false)
                     pokemonError.value = Resource.error("", false)
                     pokemon.value = resource
+                }
+            }
+        }
+    }
+
+    fun getPokemonDetailAbout(pokemonId: String) {
+        pokemonLoading.value = Resource.loading(true)
+
+        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
+            val resource = pokemonRepository.getPokemonDetailAbout(pokemonId)
+            withContext(Dispatchers.Main) {
+                resource.data?.let {
+                    pokemonLoading.value = Resource.loading(false)
+                    pokemonError.value = Resource.error("", false)
+                    pokemonDetailAbout.value = resource
                 }
             }
         }

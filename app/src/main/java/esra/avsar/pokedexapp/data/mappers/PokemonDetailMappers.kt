@@ -2,6 +2,8 @@ package esra.avsar.pokedexapp.data.mappers
 
 import esra.avsar.pokedexapp.data.remote.dto.AbilitiesDto
 import esra.avsar.pokedexapp.data.remote.dto.AbilityDto
+import esra.avsar.pokedexapp.data.remote.dto.FlavorTextEntryDto
+import esra.avsar.pokedexapp.data.remote.dto.PokemonDetailAboutDto
 import esra.avsar.pokedexapp.data.remote.dto.PokemonDetailResponseDto
 import esra.avsar.pokedexapp.data.remote.dto.StatDto
 import esra.avsar.pokedexapp.data.remote.dto.StatsDto
@@ -9,7 +11,9 @@ import esra.avsar.pokedexapp.data.remote.dto.TypeDto
 import esra.avsar.pokedexapp.data.remote.dto.TypesDto
 import esra.avsar.pokedexapp.domain.model.Abilities
 import esra.avsar.pokedexapp.domain.model.Ability
+import esra.avsar.pokedexapp.domain.model.FlavorTextEntry
 import esra.avsar.pokedexapp.domain.model.PokemonDetail
+import esra.avsar.pokedexapp.domain.model.PokemonDetailAbout
 import esra.avsar.pokedexapp.domain.model.Stat
 import esra.avsar.pokedexapp.domain.model.Stats
 import esra.avsar.pokedexapp.domain.model.Type
@@ -57,4 +61,13 @@ fun TypeDto.toType() = Type(
 fun TypesDto.toTypes() = Types(
     slot = slot,
     type = type?.toType()
+)
+
+fun PokemonDetailAboutDto.toPokemonDetailAbout() = PokemonDetailAbout(
+    flavorTextEntries = flavorTextEntries?.map { it.toFlavorTextEntry() },
+    id = id
+)
+
+fun FlavorTextEntryDto.toFlavorTextEntry() = FlavorTextEntry(
+    flavorText = flavorText
 )

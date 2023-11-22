@@ -53,6 +53,13 @@ class PokemonDetailFragment : Fragment() {
 
         viewModel.getPokemonDetail(incomingPokemonId.toString())
 
+        viewModel.getPokemonDetailAbout(incomingPokemonId.toString())
+
+        viewModel.pokemonDetailAbout.observe(viewLifecycleOwner, Observer { pokemonDetailAbout ->
+            binding.tvDetailAboutText.text =
+                pokemonDetailAbout.data?.flavorTextEntries?.get(9)?.flavorText?.replace("\n", " ")
+        })
+
         viewModel.pokemon.observe(viewLifecycleOwner, Observer { pokemonDetails ->
             with(binding) {
                 tvDetailPokemonName.text = pokemonDetails.data?.name?.capitalizeFirstChar()

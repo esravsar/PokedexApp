@@ -38,9 +38,9 @@
             android:fontFamily="@font/poppins_bold"
             android:gravity="center_vertical"
             android:paddingTop="5dp"
-            android:text="Bulbasaur"
             android:textColor="@color/white"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            tools:text="Bulbasaur" />
 
         <TextView
             android:id="@+id/tvDetailPokemonId"
@@ -50,9 +50,9 @@
             android:fontFamily="@font/poppins_medium"
             android:gravity="center_vertical"
             android:paddingTop="5dp"
-            android:text="#001"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:text="#001" />
     </LinearLayout>
 
     <ImageView
@@ -183,9 +183,9 @@
                         android:layout_marginStart="8dp"
                         android:fontFamily="@font/poppins"
                         android:paddingTop="2dp"
-                        android:text="6,9 kg"
                         android:textColor="@color/grayscale_dark"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        tools:text="6,9 kg" />
                 </LinearLayout>
 
                 <TextView
@@ -229,9 +229,9 @@
                         android:layout_marginStart="8dp"
                         android:fontFamily="@font/poppins"
                         android:paddingTop="2dp"
-                        android:text="0,7 m"
                         android:textColor="@color/grayscale_dark"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        tools:text="0,7 m" />
                 </LinearLayout>
 
                 <TextView
@@ -270,9 +270,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
                         android:gravity="center"
-                        android:text="Chlorophyll"
                         android:textColor="@color/grayscale_dark"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        tools:text="Chlorophyll" />
 
                     <TextView
                         android:id="@+id/tvDetailPokemonMovesTwo"
@@ -280,9 +280,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
                         android:gravity="center"
-                        android:text="Overgrow"
                         android:textColor="@color/grayscale_dark"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        tools:text="Overgrow" />
                 </LinearLayout>
 
                 <TextView
@@ -299,17 +299,17 @@
 
         <TextView
             android:id="@+id/tvDetailAboutText"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins"
             android:paddingVertical="8dp"
-            android:text="There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger."
             android:textColor="@color/grayscale_dark"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llDetailAbout" />
+            app:layout_constraintTop_toBottomOf="@id/llDetailAbout"
+            tools:text="There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger." />
 
         <TextView
             android:id="@+id/tvDetailBaseStats"

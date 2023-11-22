@@ -1,5 +1,6 @@
 package esra.avsar.pokedexapp.data.remote
 
+import esra.avsar.pokedexapp.data.remote.dto.PokemonDetailAboutDto
 import esra.avsar.pokedexapp.data.remote.dto.PokemonDetailResponseDto
 import esra.avsar.pokedexapp.data.remote.dto.PokemonResponseDto
 import retrofit2.Response
@@ -21,4 +22,9 @@ interface PokemonAPI {
     suspend fun getPokemonDetail(
         @Path("pokemonId") pokemonId: String
     ): Response<PokemonDetailResponseDto>
+
+    @GET("pokemon-species/{pokemonId}")
+    suspend fun getPokemonDetailAbout(
+        @Path("pokemonId") pokemonId: String
+    ): Response<PokemonDetailAboutDto>
 }

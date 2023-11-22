@@ -2,6 +2,7 @@ package esra.avsar.pokedexapp.data.repository
 
 import esra.avsar.pokedexapp.domain.model.Pokemon
 import esra.avsar.pokedexapp.domain.model.PokemonDetail
+import esra.avsar.pokedexapp.domain.model.PokemonDetailAbout
 import esra.avsar.pokedexapp.domain.repository.PokemonRepository
 import esra.avsar.pokedexapp.domain.usecase.getpokemondetail.GetPokemonDetailUseCase
 import esra.avsar.pokedexapp.domain.usecase.getpokemons.GetPokemonsUseCase
@@ -19,5 +20,9 @@ class PokemonRepositoryImpl @Inject constructor(
 
     override suspend fun getPokemonDetail(pokemonId: String): Resource<PokemonDetail?> {
         return getPokemonDetailUseCase.executeGetPokemonDetail(pokemonId)
+    }
+
+    override suspend fun getPokemonDetailAbout(pokemonId: String): Resource<PokemonDetailAbout?> {
+        return getPokemonDetailUseCase.executeGetPokemonDetailAbout(pokemonId)
     }
 }
