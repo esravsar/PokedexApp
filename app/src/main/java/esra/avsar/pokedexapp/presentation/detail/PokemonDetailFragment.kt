@@ -1,9 +1,14 @@
 package esra.avsar.pokedexapp.presentation.detail
 
+import android.graphics.PorterDuff
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,6 +21,7 @@ import esra.avsar.pokedexapp.databinding.FragmentPokemonDetailBinding
 import esra.avsar.pokedexapp.extension.capitalizeFirstChar
 import esra.avsar.pokedexapp.extension.formatPokemonId
 import esra.avsar.pokedexapp.extension.formatPokemonStat
+import esra.avsar.pokedexapp.util.PokemonUtil
 
 @AndroidEntryPoint
 class PokemonDetailFragment : Fragment() {
@@ -45,37 +51,50 @@ class PokemonDetailFragment : Fragment() {
         val formattedPokemonId = incomingPokemonId.formatPokemonId()
         binding.tvDetailPokemonId.text = formattedPokemonId
 
-        val imageUrl =
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${incomingPokemonId}.png"
-        Glide.with(requireContext())
-            .load(imageUrl)
-            .into(binding.ivDetailPokemon)
+        loadImage(incomingPokemonId)
 
         viewModel.getPokemonDetail(incomingPokemonId.toString())
 
-        viewModel.getPokemonDetailAbout(incomingPokemonId.toString())
+        loadDetail()
+    }
 
+    private fun loadDetail() {
         viewModel.pokemonDetailAbout.observe(viewLifecycleOwner, Observer { pokemonDetailAbout ->
             binding.tvDetailAboutText.text =
                 pokemonDetailAbout.data?.flavorTextEntries?.get(9)?.flavorText?.replace("\n", " ")
         })
 
-        viewModel.pokemon.observe(viewLifecycleOwner, Observer { pokemonDetails ->
+        viewModel.pokemonDetail.observe(viewLifecycleOwner, Observer { pokemonDetails ->
             with(binding) {
                 tvDetailPokemonName.text = pokemonDetails.data?.name?.capitalizeFirstChar()
 
                 pokemonDetails.data?.types?.forEach { pokemonType ->
                     val pokemonTypeSlot = pokemonType.slot
+                    val pokemonColor =
+                        PokemonUtil.getDetailColorByType(pokemonType.type?.name)
 
                     when (pokemonTypeSlot) {
                         1 -> {
                             tvDetailPokemonTypeOne.text =
                                 pokemonType.type?.name?.capitalizeFirstChar()
+                            setPokemonDetailColor(pokemonColor)
+
+                            tvDetailPokemonTypeOne.background.setColorFilter(
+                                setPokemonColor(
+                                    pokemonColor
+                                ), PorterDuff.Mode.SRC_IN
+                            )
                         }
 
                         2 -> {
                             tvDetailPokemonTypeTwo.text =
                                 pokemonType.type?.name?.capitalizeFirstChar()
+
+                            tvDetailPokemonTypeTwo.background.setColorFilter(
+                                setPokemonColor(
+                                    pokemonColor
+                                ), PorterDuff.Mode.SRC_IN
+                            )
                         }
                     }
                 }
@@ -164,5 +183,56 @@ class PokemonDetailFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun loadImage(id: Int) {
+        val imageUrl =
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png"
+        Glide.with(requireContext())
+            .load(imageUrl)
+            .into(binding.ivDetailPokemon)
+    }
+
+    fun setPokemonColor(pokemonColor: Int): Int {
+        return ContextCompat.getColor(requireContext(), pokemonColor)
+    }
+
+    private fun setPokemonDetailColor(pokemonColor: Int) {
+        with(binding) {
+            clDetailPokemon.setBackgroundColor(setPokemonColor(pokemonColor))
+            nstdDetailPokemon.setBackgroundColor(setPokemonColor(pokemonColor))
+
+            if (Build.VERSION.SDK_INT >= 21) {
+                val window: Window = requireActivity().window
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+                window.statusBarColor = resources.getColor(pokemonColor)
+            }
+
+            tvDetailAbout.setTextColor(setPokemonColor(pokemonColor))
+
+            tvDetailBaseStats.setTextColor(setPokemonColor(pokemonColor))
+
+            tvDetailPokemonHPText.setTextColor(setPokemonColor(pokemonColor))
+            tvDetailPokemonATKText.setTextColor(setPokemonColor(pokemonColor))
+            tvDetailPokemonDEFText.setTextColor(setPokemonColor(pokemonColor))
+            tvDetailPokemonSATKText.setTextColor(setPokemonColor(pokemonColor))
+            tvDetailPokemonSDEFText.setTextColor(setPokemonColor(pokemonColor))
+            tvDetailPokemonSPDText.setTextColor(setPokemonColor(pokemonColor))
+
+            pbHP.progressTintList = requireContext().getColorStateList(pokemonColor)
+            pbATK.progressTintList = requireContext().getColorStateList(pokemonColor)
+            pbDEF.progressTintList = requireContext().getColorStateList(pokemonColor)
+            pbSATK.progressTintList = requireContext().getColorStateList(pokemonColor)
+            pbSDEF.progressTintList = requireContext().getColorStateList(pokemonColor)
+            pbSPD.progressTintList = requireContext().getColorStateList(pokemonColor)
+
+            pbHP.progressBackgroundTintList = requireContext().getColorStateList(pokemonColor)
+            pbATK.progressBackgroundTintList = requireContext().getColorStateList(pokemonColor)
+            pbDEF.progressBackgroundTintList = requireContext().getColorStateList(pokemonColor)
+            pbSATK.progressBackgroundTintList = requireContext().getColorStateList(pokemonColor)
+            pbSDEF.progressBackgroundTintList = requireContext().getColorStateList(pokemonColor)
+            pbSPD.progressBackgroundTintList = requireContext().getColorStateList(pokemonColor)
+        }
     }
 }

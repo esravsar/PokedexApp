@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PokemonDetailViewModel @Inject constructor(private val pokemonRepository: PokemonRepository) :
     ViewModel() {
-    val pokemon = MutableLiveData<Resource<PokemonDetail?>>()
+    val pokemonDetail = MutableLiveData<Resource<PokemonDetail?>>()
     val pokemonDetailAbout = MutableLiveData<Resource<PokemonDetailAbout?>>()
     val pokemonLoading = MutableLiveData<Resource<Boolean>>()
     val pokemonError = MutableLiveData<Resource<Boolean>>()
@@ -31,28 +31,21 @@ class PokemonDetailViewModel @Inject constructor(private val pokemonRepository: 
         pokemonLoading.value = Resource.loading(true)
 
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            val resource = pokemonRepository.getPokemonDetail(pokemonId)
+            val detailResource = pokemonRepository.getPokemonDetail(pokemonId)
+            val detailAboutResource = pokemonRepository.getPokemonDetailAbout(pokemonId)
             withContext(Dispatchers.Main) {
-                resource.data?.let {
+                detailResource.data?.let {
                     pokemonLoading.value = Resource.loading(false)
                     pokemonError.value = Resource.error("", false)
-                    pokemon.value = resource
+                    pokemonDetail.value = detailResource
                 }
-            }
-        }
-    }
 
-    fun getPokemonDetailAbout(pokemonId: String) {
-        pokemonLoading.value = Resource.loading(true)
-
-        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            val resource = pokemonRepository.getPokemonDetailAbout(pokemonId)
-            withContext(Dispatchers.Main) {
-                resource.data?.let {
+                detailAboutResource.data?.let {
                     pokemonLoading.value = Resource.loading(false)
                     pokemonError.value = Resource.error("", false)
-                    pokemonDetailAbout.value = resource
+                    pokemonDetailAbout.value = detailAboutResource
                 }
+
             }
         }
     }
