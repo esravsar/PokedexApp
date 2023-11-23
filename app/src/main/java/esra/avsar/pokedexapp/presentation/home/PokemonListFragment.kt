@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
+import android.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -51,18 +52,33 @@ class PokemonListFragment : Fragment() {
             val action =
                 PokemonListFragmentDirections.actionPokemonListFragmentToPokemonDetailFragment(it)
             findNavController().navigate(action)
-
         }
+
+        binding.searchView.setOnQueryTextListener(object : OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.onQueryTextChange(query)
+                binding.searchView.clearFocus()
+                return false
+            }
+
+            override fun onQueryTextChange(nextText: String?): Boolean {
+                viewModel.onQueryTextChange(nextText)
+                return true
+            }
+        })
     }
 
     private fun observeLiveData() {
+        binding.rvPokemon.adapter = pokemonAdapter
         viewModel.pokemonList.observe(viewLifecycleOwner) { pokemons ->
-            pokemons?.let {
+            pokemons.data?.let {
                 binding.rvPokemon.visibility = View.VISIBLE
-                pokemons.data?.let {
-                    pokemonAdapter.updatePokemonList(it)
-                    viewModel.setList(pokemons.data)
-                    binding.rvPokemon.adapter = pokemonAdapter
+                pokemonAdapter.updatePokemonList(it)
+                binding.searchView.clearFocus()
+                if (it.isEmpty()) {
+                    binding.tvErrorText.visibility = View.VISIBLE
+                } else {
+                    binding.tvErrorText.visibility = View.GONE
                 }
             }
         }

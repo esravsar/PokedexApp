@@ -7,5 +7,7 @@ import java.io.Serializable
  */
 data class Pokemon(
     val name: String?,
-    val url: String?
+    val formattedId: String?,
+    val id: Int,
+    val image: String
 ) : Serializable

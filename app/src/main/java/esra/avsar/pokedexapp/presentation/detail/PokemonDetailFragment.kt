@@ -63,10 +63,9 @@ class PokemonDetailFragment : Fragment() {
             loadImage(imageUrl)
         }
 
-        val formattedPokemonId = incomingPokemonId.formatPokemonId()
-        binding.tvDetailPokemonId.text = formattedPokemonId
+        binding.tvDetailPokemonId.text = incomingPokemonId
 
-        viewModel.updateInitialPokemonId(bundle.id)
+        viewModel.updateInitialPokemonId(incomingPokemonId.toInt())
 
         loadDetail()
     }

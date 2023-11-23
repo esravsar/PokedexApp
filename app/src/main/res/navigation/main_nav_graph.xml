@@ -21,13 +21,13 @@
         android:name="esra.avsar.pokedexapp.presentation.detail.PokemonDetailFragment"
         android:label="fragment_pokemon_detail"
         tools:layout="@layout/fragment_pokemon_detail" >
-        <argument
-            android:name="id"
-            app:argType="integer" />
         <action
             android:id="@+id/action_pokemonDetailFragment_to_pokemonListFragment"
             app:destination="@id/pokemonListFragment"
             app:popUpTo="@id/pokemonDetailFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="id"
+            app:argType="string" />
     </fragment>
 </navigation>

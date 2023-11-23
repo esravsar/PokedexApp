@@ -51,6 +51,7 @@
         android:iconifiedByDefault="false"
         android:queryBackground="@null"
         android:queryHint="Search"
+        android:theme="@style/SearchViewStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/llPokedexAppTitleAndIcon" />
@@ -91,9 +92,11 @@
         android:layout_height="wrap_content"
         android:text="@string/no_pokemon_found"
         android:textColor="@color/red_bg"
+        android:translationZ="5dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/rvPokemon"
         app:layout_constraintEnd_toEndOf="@+id/rvPokemon"
         app:layout_constraintStart_toStartOf="@+id/rvPokemon"
-        app:layout_constraintTop_toTopOf="@+id/rvPokemon" />
+        app:layout_constraintTop_toTopOf="@+id/rvPokemon"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,4 +6,10 @@
         <item name="color">@color/white</item>
         <item name="cardElevation">5dp</item>
     </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="colorControlNormal">@color/red_bg</item>
+        <item name="colorControlActivated">@color/red_bg</item>
+        <item name="closeIconTint">@color/red_bg</item>
+    </style>
 </resources>

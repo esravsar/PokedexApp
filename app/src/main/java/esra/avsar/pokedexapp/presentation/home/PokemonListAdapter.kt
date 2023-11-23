@@ -7,7 +7,6 @@ import com.bumptech.glide.Glide
 import esra.avsar.pokedexapp.databinding.AdapterPokemonItemBinding
 import esra.avsar.pokedexapp.domain.model.Pokemon
 import esra.avsar.pokedexapp.extension.capitalizeFirstChar
-import esra.avsar.pokedexapp.extension.formatPokemonId
 
 /**
  * Created by EsraAvsar on 20.11.2023.
@@ -34,25 +33,20 @@ class PokemonListAdapter : RecyclerView.Adapter<PokemonListAdapter.PokemonHolder
         val pokemon = pokemonList.get(position)
         holder.binding.tvPokemonName.text = pokemon?.name?.capitalizeFirstChar()
 
-        val pokemonId = pokemon?.url?.split("/").let { it?.get(it.size - 2)?.toIntOrNull() ?: 1 }
+        holder.binding.tvPokemonNumber.text = pokemon?.formattedId
 
-        val formattedPokemonId = pokemonId.formatPokemonId()
-        holder.binding.tvPokemonNumber.text = formattedPokemonId
-
-        val imageUrl =
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png"
         Glide.with(holder.binding.ivPokemon.context)
-            .load(imageUrl)
+            .load(pokemon?.image)
             .into(holder.binding.ivPokemon)
 
         holder.itemView.setOnClickListener {
-            onItemClickListener?.invoke(pokemonId)
+            onItemClickListener?.invoke(pokemon?.id.toString())
         }
     }
 
-    private var onItemClickListener: ((Int) -> Unit)? = null
+    private var onItemClickListener: ((String) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (Int) -> Unit) {
+    fun setOnItemClickListener(listener: (String) -> Unit) {
         onItemClickListener = listener
     }
 

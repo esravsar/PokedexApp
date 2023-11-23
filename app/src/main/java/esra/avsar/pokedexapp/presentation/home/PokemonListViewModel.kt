@@ -9,6 +9,14 @@ import esra.avsar.pokedexapp.domain.repository.PokemonRepository
 import esra.avsar.pokedexapp.util.Resource
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -20,11 +28,26 @@ class PokemonListViewModel @Inject constructor(
     val pokemonList = MutableLiveData<Resource<List<Pokemon?>>>()
     val pokemonLoading = MutableLiveData<Resource<Boolean>>()
     val pokemonError = MutableLiveData<Resource<Boolean>>()
-    val searchPokemonList: MutableList<Pokemon?> = mutableListOf()
+    private val searchPokemonList = mutableListOf<Pokemon?>()
+    private val queryDebounceFlow = MutableStateFlow<String?>(null)
 
-    fun setList(list: List<Pokemon?>) {
-        searchPokemonList.clear()
-        searchPokemonList.addAll(list)
+    init {
+        viewModelScope.launch {
+            queryDebounceFlow.filterNotNull().distinctUntilChanged().debounce(300).onEach { query ->
+                pokemonLoading.value = Resource.loading(true)
+                delay(2000)
+                val updatedList = searchPokemonList.filter {
+                    it?.name?.contains(query) == true || it?.formattedId.toString().contains(query)
+                }
+
+                pokemonList.value = Resource.success(updatedList)
+                pokemonLoading.value = Resource.loading(false)
+            }.collect()
+        }
+    }
+
+    fun onQueryTextChange(query: String?) {
+        queryDebounceFlow.update { query }
     }
 
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
@@ -46,6 +69,7 @@ class PokemonListViewModel @Inject constructor(
                     pokemonLoading.value = Resource.loading(false)
                     pokemonError.value = Resource.error("", false)
                     pokemonList.value = resource
+                    searchPokemonList.addAll(it)
                 }
             }
         }
