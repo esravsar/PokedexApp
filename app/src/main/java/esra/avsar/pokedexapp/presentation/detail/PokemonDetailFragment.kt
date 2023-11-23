@@ -10,7 +10,6 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -48,25 +47,45 @@ class PokemonDetailFragment : Fragment() {
                 .navigate(R.id.action_pokemonDetailFragment_to_pokemonListFragment)
         }
 
+        binding.btnDetailLeftChevron.setOnClickListener {
+            viewModel.loadPreviousPokemon()
+        }
+
+        binding.btnDetailRightChevron.setOnClickListener {
+            viewModel.loadNextPokemon(150)
+        }
+
+        viewModel.currentPokemonId.observe(viewLifecycleOwner) { pokemonId ->
+            binding.tvDetailPokemonId.text = pokemonId.formatPokemonId()
+        }
+
+        viewModel.currentImageUrl.observe(viewLifecycleOwner) { imageUrl ->
+            loadImage(imageUrl)
+        }
+
         val formattedPokemonId = incomingPokemonId.formatPokemonId()
         binding.tvDetailPokemonId.text = formattedPokemonId
 
-        loadImage(incomingPokemonId)
-
-        viewModel.getPokemonDetail(incomingPokemonId)
+        viewModel.updateInitialPokemonId(bundle.id)
 
         loadDetail()
     }
 
     private fun loadDetail() {
-        viewModel.pokemonDetailAbout.observe(viewLifecycleOwner, Observer { pokemonDetailAbout ->
+        viewModel.pokemonDetailAbout.observe(viewLifecycleOwner) { pokemonDetailAbout ->
             binding.tvDetailAboutText.text =
                 pokemonDetailAbout.data?.flavorTextEntries?.get(9)?.flavorText?.replace("\n", " ")
-        })
+        }
 
-        viewModel.pokemonDetail.observe(viewLifecycleOwner, Observer { pokemonDetails ->
+        viewModel.pokemonDetail.observe(viewLifecycleOwner) { pokemonDetails ->
             with(binding) {
                 tvDetailPokemonName.text = pokemonDetails.data?.name?.capitalizeFirstChar()
+
+                val currentPokemonId = pokemonDetails.data?.id ?: 1
+                binding.btnDetailLeftChevron.visibility =
+                    if (currentPokemonId == 1) View.INVISIBLE else View.VISIBLE
+                binding.btnDetailRightChevron.visibility =
+                    if (currentPokemonId == 150) View.INVISIBLE else View.VISIBLE
 
                 pokemonDetails.data?.types?.forEach { pokemonType ->
                     val pokemonTypeSlot = pokemonType.slot
@@ -182,12 +201,10 @@ class PokemonDetailFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
     }
 
-    private fun loadImage(id: Int) {
-        val imageUrl =
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png"
+    private fun loadImage(imageUrl: String) {
         Glide.with(requireContext())
             .load(imageUrl)
             .into(binding.ivDetailPokemon)
