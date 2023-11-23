@@ -11,7 +11,7 @@
         android:id="@+id/clDetailPokemon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="4dp"
+        android:padding="@dimen/_4dp"
         tools:context=".presentation.detail.PokemonDetailFragment">
 
         <LinearLayout
@@ -20,9 +20,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingHorizontal="20dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
+            android:paddingHorizontal="@dimen/_20dp"
+            android:paddingTop="@dimen/_16dp"
+            android:paddingBottom="@dimen/_16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -39,14 +39,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="@dimen/_8dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center_vertical"
-                android:paddingTop="5dp"
+                android:paddingTop="@dimen/_5dp"
                 android:textColor="@color/white"
-                android:textSize="23sp"
-                tools:text="Bulbasaur" />
+                android:textSize="@dimen/_24sp"
+                tools:text="@string/pokemon_name" />
 
             <TextView
                 android:id="@+id/tvDetailPokemonId"
@@ -55,18 +55,18 @@
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center_vertical"
-                android:paddingTop="5dp"
+                android:paddingTop="@dimen/_5dp"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                tools:text="#001" />
+                android:textSize="@dimen/_16sp"
+                tools:text="@string/pokemon_id" />
         </LinearLayout>
 
         <ImageView
             android:id="@+id/ivDetailPokeballShadow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginTop="@dimen/_4dp"
+            android:layout_marginEnd="@dimen/_4dp"
             android:src="@drawable/pokeball_shadow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -75,8 +75,8 @@
             android:id="@+id/btnDetailLeftChevron"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="104dp"
+            android:layout_marginStart="@dimen/_20dp"
+            android:layout_marginTop="@dimen/_104dp"
             android:background="@android:color/transparent"
             android:src="@drawable/chevron_left"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,8 +86,8 @@
             android:id="@+id/btnDetailRightChevron"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginTop="104dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginTop="@dimen/_104dp"
+            android:layout_marginEnd="@dimen/_20dp"
             android:background="@android:color/transparent"
             android:src="@drawable/chevron_right"
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,12 +96,12 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/_16dp"
             android:background="@drawable/rv_bg"
             android:clipToPadding="false"
-            android:paddingHorizontal="20dp"
-            android:paddingTop="56dp"
-            android:paddingBottom="20dp"
+            android:paddingHorizontal="@dimen/_20dp"
+            android:paddingTop="@dimen/_56dp"
+            android:paddingBottom="@dimen/_20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -124,21 +124,21 @@
                     android:background="@drawable/pokemon_type_bg"
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="center"
-                    android:text="Grass"
                     android:textColor="@color/white"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/_12sp"
+                    tools:text="@string/pokemon_type_one" />
 
                 <TextView
                     android:id="@+id/tvDetailPokemonTypeTwo"
                     android:layout_width="70dp"
                     android:layout_height="27dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="@dimen/_16dp"
                     android:background="@drawable/pokemon_type_bg"
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="center"
-                    android:text="Poison"
                     android:textColor="@color/white"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/_12sp"
+                    tools:text="@string/pokemon_type_two" />
             </LinearLayout>
 
             <TextView
@@ -148,9 +148,9 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center_horizontal"
-                android:text="About"
+                android:text="@string/detail_about"
                 android:textColor="@color/red_bg"
-                android:textSize="15sp"
+                android:textSize="@dimen/_15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/llDetailPokemonTypes" />
@@ -175,7 +175,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:paddingVertical="12dp">
+                        android:paddingVertical="@dimen/_12dp">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -186,23 +186,23 @@
                             android:id="@+id/tvDetailPokemonWeight"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="@dimen/_8dp"
                             android:fontFamily="@font/poppins"
-                            android:paddingTop="2dp"
+                            android:paddingTop="@dimen/_2dp"
                             android:textColor="@color/grayscale_dark"
-                            android:textSize="12sp"
-                            tools:text="6,9 kg" />
+                            android:textSize="@dimen/_12sp"
+                            tools:text="@string/pokemon_weight" />
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/_4dp"
                         android:fontFamily="@font/poppins"
                         android:gravity="center"
-                        android:text="Weight"
+                        android:text="@string/detail_weight"
                         android:textColor="@color/grayscale_medium"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/_11sp" />
                 </LinearLayout>
 
                 <View
@@ -221,7 +221,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:paddingVertical="12dp">
+                        android:paddingVertical="@dimen/_12dp">
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -232,23 +232,23 @@
                             android:id="@+id/tvDetailPokemonHeight"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="@dimen/_8dp"
                             android:fontFamily="@font/poppins"
-                            android:paddingTop="2dp"
+                            android:paddingTop="@dimen/_2dp"
                             android:textColor="@color/grayscale_dark"
-                            android:textSize="12sp"
-                            tools:text="0,7 m" />
+                            android:textSize="@dimen/_12sp"
+                            tools:text="@string/pokemon_height" />
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/_4dp"
                         android:fontFamily="@font/poppins"
                         android:gravity="center"
-                        android:text="Height"
+                        android:text="@string/detail_height"
                         android:textColor="@color/grayscale_medium"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/_11sp" />
                 </LinearLayout>
 
                 <View
@@ -268,7 +268,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:paddingVertical="11dp">
+                        android:paddingVertical="@dimen/_11dp">
 
                         <TextView
                             android:id="@+id/tvDetailPokemonMovesOne"
@@ -277,7 +277,7 @@
                             android:fontFamily="@font/poppins"
                             android:gravity="center"
                             android:textColor="@color/grayscale_dark"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/_12sp"
                             tools:text="Chlorophyll" />
 
                         <TextView
@@ -287,19 +287,19 @@
                             android:fontFamily="@font/poppins"
                             android:gravity="center"
                             android:textColor="@color/grayscale_dark"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/_12sp"
                             tools:text="Overgrow" />
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/_4dp"
                         android:fontFamily="@font/poppins"
                         android:gravity="center"
                         android:text="Moves"
                         android:textColor="@color/grayscale_medium"
-                        android:textSize="11sp" />
+                        android:textSize="@dimen/_11sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -307,26 +307,26 @@
                 android:id="@+id/tvDetailAboutText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/_16dp"
                 android:fontFamily="@font/poppins"
-                android:paddingVertical="8dp"
+                android:paddingVertical="@dimen/_8dp"
                 android:textColor="@color/grayscale_dark"
-                android:textSize="13sp"
+                android:textSize="@dimen/_12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/llDetailAbout"
-                tools:text="There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger." />
+                tools:text="@string/detail_about_description" />
 
             <TextView
                 android:id="@+id/tvDetailBaseStats"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/_16dp"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center_horizontal"
-                android:text="Base Stats"
+                android:text="@string/detail_base_stats"
                 android:textColor="@color/red_bg"
-                android:textSize="15sp"
+                android:textSize="@dimen/_15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvDetailAboutText" />
@@ -334,7 +334,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/_16dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -351,66 +351,66 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="HP"
+                        android:text="@string/stat_hp"
                         android:textColor="@color/red_bg"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/_12sp" />
 
                     <TextView
                         android:id="@+id/tvDetailPokemonATKText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="ATK"
+                        android:text="@string/stat_atk"
                         android:textColor="@color/red_bg"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/_12sp" />
 
                     <TextView
                         android:id="@+id/tvDetailPokemonDEFText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="DEF"
+                        android:text="@string/stat_def"
                         android:textColor="@color/red_bg"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/_12sp" />
 
                     <TextView
                         android:id="@+id/tvDetailPokemonSATKText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="SATK"
+                        android:text="@string/stat_satk"
                         android:textColor="@color/red_bg"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/_12sp" />
 
                     <TextView
                         android:id="@+id/tvDetailPokemonSDEFText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="SDEF"
+                        android:text="@string/stat_sdef"
                         android:textColor="@color/red_bg"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/_12sp" />
 
                     <TextView
                         android:id="@+id/tvDetailPokemonSPDText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="SPD"
+                        android:text="@string/stat_spd"
                         android:textColor="@color/red_bg"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/_12sp" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="fill_parent"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="@dimen/_12dp"
                     android:background="@color/grayscale_light" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="@dimen/_12dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -424,16 +424,16 @@
                             android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="044"
                             android:textColor="@color/grayscale_dark"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/_12sp"
+                            tools:text="@string/stat_value" />
 
                         <ProgressBar
                             android:id="@+id/pbHP"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="@dimen/_8dp"
                             android:indeterminate="false"
                             android:max="255"
                             android:progress="45"
@@ -452,16 +452,16 @@
                             android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="044"
                             android:textColor="@color/grayscale_dark"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/_12sp"
+                            tools:text="@string/stat_value" />
 
                         <ProgressBar
                             android:id="@+id/pbATK"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="@dimen/_8dp"
                             android:indeterminate="false"
                             android:max="255"
                             android:progress="45"
@@ -480,16 +480,16 @@
                             android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="044"
                             android:textColor="@color/grayscale_dark"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/_12sp"
+                            tools:text="@string/stat_value" />
 
                         <ProgressBar
                             android:id="@+id/pbDEF"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="@dimen/_8dp"
                             android:indeterminate="false"
                             android:max="255"
                             android:progress="45"
@@ -508,16 +508,16 @@
                             android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="044"
                             android:textColor="@color/grayscale_dark"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/_12sp"
+                            tools:text="@string/stat_value" />
 
                         <ProgressBar
                             android:id="@+id/pbSATK"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="@dimen/_8dp"
                             android:indeterminate="false"
                             android:max="255"
                             android:progress="45"
@@ -536,16 +536,16 @@
                             android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="044"
                             android:textColor="@color/grayscale_dark"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/_12sp"
+                            tools:text="@string/stat_value" />
 
                         <ProgressBar
                             android:id="@+id/pbSDEF"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="@dimen/_8dp"
                             android:indeterminate="false"
                             android:max="255"
                             android:progress="45"
@@ -564,16 +564,16 @@
                             android:layout_width="30dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="044"
                             android:textColor="@color/grayscale_dark"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/_12sp"
+                            tools:text="@string/stat_value" />
 
                         <ProgressBar
                             android:id="@+id/pbSPD"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="@dimen/_8dp"
                             android:indeterminate="false"
                             android:max="255"
                             android:progress="45"

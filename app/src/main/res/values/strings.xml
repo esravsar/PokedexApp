@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">PokedexApp</string>
+    <string name="pokemon_id">#001</string>
+    <string name="pokemon_name">Bulbasaur</string>
+    <string name="pokedex">Pokédex</string>
+    <string name="no_pokemon_found">No pokemon found!</string>
+    <string name="pokemon_type_one">Grass</string>
+    <string name="pokemon_type_two">Poison</string>
+    <string name="detail_about">About</string>
+    <string name="pokemon_weight">6,9 kg</string>
+    <string name="detail_weight">Weight</string>
+    <string name="pokemon_height">0,7 m</string>
+    <string name="detail_height">Height</string>
+    <string name="detail_about_description">There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.</string>
+    <string name="detail_base_stats">Base Stats</string>
+    <string name="stat_hp">HP</string>
+    <string name="stat_atk">ATK</string>
+    <string name="stat_def">DEF</string>
+    <string name="stat_satk">SATK</string>
+    <string name="stat_sdef">SDEF</string>
+    <string name="stat_spd">SPD</string>
+    <string name="stat_value">044</string>
 </resources>
