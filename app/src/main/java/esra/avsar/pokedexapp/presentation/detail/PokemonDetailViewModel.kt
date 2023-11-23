@@ -27,25 +27,17 @@ class PokemonDetailViewModel @Inject constructor(private val pokemonRepository: 
         pokemonError.value = Resource.error(throwable.localizedMessage ?: "Error!", true)
     }
 
-    fun getPokemonDetail(pokemonId: String) {
+    fun getPokemonDetail(pokemonId: Int) {
         pokemonLoading.value = Resource.loading(true)
 
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             val detailResource = pokemonRepository.getPokemonDetail(pokemonId)
             val detailAboutResource = pokemonRepository.getPokemonDetailAbout(pokemonId)
             withContext(Dispatchers.Main) {
-                detailResource.data?.let {
-                    pokemonLoading.value = Resource.loading(false)
-                    pokemonError.value = Resource.error("", false)
-                    pokemonDetail.value = detailResource
-                }
-
-                detailAboutResource.data?.let {
-                    pokemonLoading.value = Resource.loading(false)
-                    pokemonError.value = Resource.error("", false)
-                    pokemonDetailAbout.value = detailAboutResource
-                }
-
+                pokemonDetail.value = detailResource
+                pokemonDetailAbout.value = detailAboutResource
+                pokemonLoading.value = Resource.loading(false)
+                pokemonError.value = Resource.error("", false)
             }
         }
     }

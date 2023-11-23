@@ -11,7 +11,7 @@ import esra.avsar.pokedexapp.util.Resource
 interface PokemonRepository {
     suspend fun getPokemons(): Resource<List<Pokemon?>>
 
-    suspend fun getPokemonDetail(pokemonId: String): Resource<PokemonDetail?>
+    suspend fun getPokemonDetail(pokemonId: Int): Resource<PokemonDetail?>
 
-    suspend fun getPokemonDetailAbout(pokemonId: String): Resource<PokemonDetailAbout?>
+    suspend fun getPokemonDetailAbout(pokemonId: Int): Resource<PokemonDetailAbout?>
 }

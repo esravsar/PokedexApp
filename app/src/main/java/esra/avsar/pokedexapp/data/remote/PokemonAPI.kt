@@ -20,11 +20,11 @@ interface PokemonAPI {
 
     @GET("pokemon/{pokemonId}")
     suspend fun getPokemonDetail(
-        @Path("pokemonId") pokemonId: String
+        @Path("pokemonId") pokemonId: Int
     ): Response<PokemonDetailResponseDto>
 
     @GET("pokemon-species/{pokemonId}")
     suspend fun getPokemonDetailAbout(
-        @Path("pokemonId") pokemonId: String
+        @Path("pokemonId") pokemonId: Int
     ): Response<PokemonDetailAboutDto>
 }

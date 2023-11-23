@@ -5,7 +5,7 @@
     android:id="@+id/nstdDetailPokemon"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red_bg">
+    android:background="@color/grayscale_bg">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clDetailPokemon"

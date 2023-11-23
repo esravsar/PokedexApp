@@ -18,11 +18,11 @@ class PokemonRepositoryImpl @Inject constructor(
         return getPokemonsUseCase.executeGetPokemons()
     }
 
-    override suspend fun getPokemonDetail(pokemonId: String): Resource<PokemonDetail?> {
+    override suspend fun getPokemonDetail(pokemonId: Int): Resource<PokemonDetail?> {
         return getPokemonDetailUseCase.executeGetPokemonDetail(pokemonId)
     }
 
-    override suspend fun getPokemonDetailAbout(pokemonId: String): Resource<PokemonDetailAbout?> {
+    override suspend fun getPokemonDetailAbout(pokemonId: Int): Resource<PokemonDetailAbout?> {
         return getPokemonDetailUseCase.executeGetPokemonDetailAbout(pokemonId)
     }
 }

@@ -7,7 +7,8 @@ import esra.avsar.pokedexapp.domain.model.PokemonDetail
 import esra.avsar.pokedexapp.domain.model.PokemonDetailAbout
 import esra.avsar.pokedexapp.util.Resource
 import retrofit2.HttpException
-import java.io.IOError
+import retrofit2.Response
+import java.io.IOException
 import javax.inject.Inject
 
 /**
@@ -16,37 +17,34 @@ import javax.inject.Inject
 class GetPokemonDetailUseCase @Inject constructor(
     private val pokemonAPI: PokemonAPI
 ) {
-    suspend fun executeGetPokemonDetail(pokemonId: String): Resource<PokemonDetail?> {
-        return try {
-            val response = pokemonAPI.getPokemonDetail(pokemonId)
-            if (response?.isSuccessful == true) {
-                response.body()?.let { pokemonDetailDto ->
-                    return@let Resource.success(pokemonDetailDto.toPokemonDetail())
-                } ?: Resource.error("No pokemon found", null)
-            } else {
-                Resource.error("No pokemon found", null)
-            }
-        } catch (e: HttpException) {
-            Resource.error("Error!", null)
-        } catch (e: IOError) {
-            Resource.error("Could not reach internet", null)
+    private suspend fun <T, R> executePokemonDetail(
+        call: suspend () -> Response<T>,
+        mapper: (T) -> R
+    ): Resource<R?> = try {
+        val response = call.invoke()
+
+        if (response?.isSuccessful == true) {
+            response.body()?.let { data ->
+                Resource.success(mapper.invoke(data))
+            } ?: Resource.error("No pokemon found", null)
+        } else {
+            Resource.error("No pokemon found", null)
         }
+    } catch (e: HttpException) {
+        Resource.error("Error!", null)
+    } catch (e: IOException) {
+        Resource.error("Could not reach internet", null)
     }
 
-    suspend fun executeGetPokemonDetailAbout(pokemonId: String): Resource<PokemonDetailAbout?> {
-        return try {
-            val response = pokemonAPI.getPokemonDetailAbout(pokemonId)
-            if (response?.isSuccessful == true) {
-                response.body()?.let { pokemonDetailAboutDto ->
-                    return@let Resource.success(pokemonDetailAboutDto.toPokemonDetailAbout())
-                } ?: Resource.error("No pokemon found", null)
-            } else {
-                Resource.error("No pokemon found", null)
-            }
-        } catch (e: HttpException) {
-            Resource.error("Error!", null)
-        } catch (e: IOError) {
-            Resource.error("Could not reach internet", null)
-        }
-    }
+    suspend fun executeGetPokemonDetail(pokemonId: Int): Resource<PokemonDetail?> =
+        executePokemonDetail(
+            { pokemonAPI.getPokemonDetail(pokemonId) },
+            { it.toPokemonDetail() }
+        )
+
+    suspend fun executeGetPokemonDetailAbout(pokemonId: Int): Resource<PokemonDetailAbout?> =
+        executePokemonDetail(
+            { pokemonAPI.getPokemonDetailAbout(pokemonId) },
+            { it.toPokemonDetailAbout() }
+        )
 }

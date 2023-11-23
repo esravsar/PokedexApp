@@ -53,7 +53,7 @@ class PokemonDetailFragment : Fragment() {
 
         loadImage(incomingPokemonId)
 
-        viewModel.getPokemonDetail(incomingPokemonId.toString())
+        viewModel.getPokemonDetail(incomingPokemonId)
 
         loadDetail()
     }
